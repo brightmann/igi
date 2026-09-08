@@ -1,0 +1,11 @@
+pages:
+  stage: deploy
+  script:
+    - mkdir -p public
+    # 将根目录下除 public 以外的所有静态文件复制到 public 文件夹中
+    - cp -r $(ls -A | grep -v '^public$') public/
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
